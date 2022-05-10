@@ -1,4 +1,5 @@
 import 'package:consuni_mobile/app/core/ui/app_ui.dart';
+import 'package:consuni_mobile/app/routes/auth_routers.dart';
 import 'package:consuni_mobile/app/routes/splash_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
          title: 'Consuni',
          theme: AppUI.theme,
          getPages: [
-           ...SplashRoutes.routers,
+          ...SplashRoutes.routers,
+          ...AuthRouters.routers,
          ],
        );
   }
