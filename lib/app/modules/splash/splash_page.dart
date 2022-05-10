@@ -1,3 +1,4 @@
+import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
 import 'package:flutter/material.dart';
 
@@ -13,14 +14,18 @@ class SplashPage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: CustomTextformfield(
               label: 'Text label',
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomButtom(label: 'Entrar', onPressed: (){})
         ],
       ),
     );
