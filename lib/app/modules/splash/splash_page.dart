@@ -1,3 +1,4 @@
+import 'package:consuni_mobile/app/core/ui/widgets/custom_appbar.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Splash'),
-      ),
+      appBar: CustomAppbar(),
       body: Column(
         children: [
           const SizedBox(
