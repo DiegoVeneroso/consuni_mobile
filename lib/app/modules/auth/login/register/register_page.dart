@@ -56,11 +56,10 @@ class RegisterPage extends StatelessWidget {
                   ),
                   Center(
                     child: CustomButtom(
-                        width: context.width,
-                        label: 'CADASTRAR',
-                        onPressed: () {
-                          Get.find<RegisterController>().qualquer();
-                        }),
+                      width: context.width,
+                      label: 'CADASTRAR',
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
