@@ -1,14 +1,17 @@
-import 'package:consuni_mobile/app/core/ui/app_ui.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_appbar.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
-import 'package:consuni_mobile/app/modules/auth/login/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
