@@ -1,8 +1,11 @@
+import 'package:consuni_mobile/app/core/ui/app_state.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_appbar.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
+import 'package:consuni_mobile/app/modules/auth/login/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validatorless/validatorless.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -11,7 +14,12 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends AppState<RegisterPage, RegisterController> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameEC = TextEditingController();
+  final _emailEC = TextEditingController();
+  final _passwordEC = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -41,19 +50,47 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(
                     height: 30,
                   ),
-                  const CustomTextformfield(label: 'Nome'),
+                  CustomTextformfield(
+                    label: 'Nome',
+                    controller: _nameEC,
+                    validator: Validatorless.required('Nome é obrigatório'),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const CustomTextformfield(label: 'E-mail'),
+                  CustomTextformfield(
+                    label: 'E-mail',
+                    controller: _emailEC,
+                    validator: Validatorless.multiple([
+                      Validatorless.required('E-mail é obrigatório'),
+                      Validatorless.email('E-mail inválido'),
+                    ]),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const CustomTextformfield(label: 'Senha'),
+                  CustomTextformfield(
+                    label: 'Senha',
+                    obscureText: true,
+                    controller: _passwordEC,
+                    validator: Validatorless.multiple([
+                      Validatorless.required('Senha é obrigatório'),
+                      Validatorless.min(
+                          6, 'Senha deve ter no mínimo 6 caracteres'),
+                    ]),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const CustomTextformfield(label: 'Confirma senha'),
+                  CustomTextformfield(
+                    label: 'Confirma senha',
+                    obscureText: true,
+                    validator: Validatorless.multiple([
+                      Validatorless.required('Confirmar a senha é obrigatório'),
+                      Validatorless.compare(
+                          _passwordEC, 'Senha diferente de confirma senha'),
+                    ]),
+                  ),
                   const SizedBox(
                     height: 50,
                   ),
@@ -61,7 +98,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: CustomButtom(
                       width: context.width,
                       label: 'CADASTRAR',
-                      onPressed: () {},
+                      onPressed: () {
+                        final formValid =
+                            _formKey.currentState?.validate() ?? false;
+                        if (formValid) {}
+                      },
                     ),
                   ),
                 ],
