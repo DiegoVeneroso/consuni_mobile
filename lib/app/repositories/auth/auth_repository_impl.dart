@@ -15,8 +15,11 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<UserModel> register(String name, String email, String password) async {
-    final result = await _restClient.post(
-        '/auth/register', {'name': name, 'email': email, 'password': password});
+    final result = await _restClient.post('/auth/register', {
+      'name': name,
+      'email': email,
+      'password': password,
+    });
 
     if (result.hasError) {
       var message = 'Erro ao registrar usuário';
@@ -39,8 +42,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserModel> login(String email, String password) async {
     final result = await _restClient.post('/auth/', {
-      'email': email,
+      'login': email,
       'password': password,
+      'social_login': false,
+      'supplier_user': false
     });
 
     if (result.hasError) {
