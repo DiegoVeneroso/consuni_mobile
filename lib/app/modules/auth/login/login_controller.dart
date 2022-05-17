@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:consuni_mobile/app/core/contants/constants.dart';
+import 'package:consuni_mobile/app/core/constants/constants.dart';
 import 'package:consuni_mobile/app/core/exceptions/user_notfound_exception.dart';
 import 'package:consuni_mobile/app/core/mixins/loader_mixin.dart';
 import 'package:consuni_mobile/app/core/mixins/messages_mixin.dart';
