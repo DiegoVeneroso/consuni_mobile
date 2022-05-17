@@ -2,7 +2,7 @@ import 'package:consuni_mobile/app/core/ui/app_state.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_appbar.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
-import 'package:consuni_mobile/app/modules/auth/login/register/register_controller.dart';
+import 'package:consuni_mobile/app/modules/auth/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';

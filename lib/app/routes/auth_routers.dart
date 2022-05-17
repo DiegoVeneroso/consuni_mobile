@@ -1,6 +1,6 @@
 import 'package:consuni_mobile/app/modules/auth/login/login_page.dart';
-import 'package:consuni_mobile/app/modules/auth/login/register/register_bindings.dart';
-import 'package:consuni_mobile/app/modules/auth/login/register/register_page.dart';
+import 'package:consuni_mobile/app/modules/auth/register/register_bindings.dart';
+import 'package:consuni_mobile/app/modules/auth/register/register_page.dart';
 import 'package:get/route_manager.dart';
 
 class AuthRouters {
