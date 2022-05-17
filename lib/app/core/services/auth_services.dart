@@ -7,18 +7,16 @@ class AuthServices extends GetxService {
   final _getStorage = GetStorage();
 
   Future<AuthServices> init() async {
-    print('entrou init');
-    print(Constants.USER_KEY);
-    print(_isLogged);
-
     _getStorage.listenKey(Constants.USER_KEY, (value) {
-      print('entrou no listenKey');
-      // if (value != null) {
-      //   _isLogged(true);
-      // } else {
-      //   _isLogged(false);
-      // }
-      _isLogged(value != null);
+      //forma didática
+      if (value != null) {
+        _isLogged(true);
+      } else {
+        _isLogged(false);
+      }
+
+      //forma reduzida
+      //_isLogged(value != null);
     });
 
     ever<bool?>(_isLogged, (isLogged) {
@@ -29,8 +27,12 @@ class AuthServices extends GetxService {
       }
     });
 
-    // final isLoggedData = getuserId() != null;
-    _isLogged(getUserId() != null);
+    //forma didática
+    final isLoggedData = getUserId() != null;
+    _isLogged(isLoggedData);
+
+    //forma reduzida
+    //_isLogged(getUserId() != null);
 
     return this;
   }
