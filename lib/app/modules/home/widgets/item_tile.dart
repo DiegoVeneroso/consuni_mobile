@@ -1,8 +1,14 @@
 import 'package:consuni_mobile/app/core/ui/app_ui.dart';
+import 'package:consuni_mobile/app/models/item_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemTile extends StatelessWidget {
-  const ItemTile({Key? key}) : super(key: key);
+  final ItemModel item;
+
+  const ItemTile({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

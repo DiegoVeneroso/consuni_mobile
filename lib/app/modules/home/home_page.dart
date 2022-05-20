@@ -13,11 +13,16 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: CustomAppbar(),
       drawer: CustomDrawer(),
-      body: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return ItemTile();
-          }),
+      body: Obx(
+        () => ListView.builder(
+            itemCount: controller.listItem.length,
+            itemBuilder: (context, index) {
+              final _item = controller.listItem[index];
+              return ItemTile(
+                item: _item,
+              );
+            }),
+      ),
     );
   }
 }
