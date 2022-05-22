@@ -42,10 +42,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserModel> login(String email, String password) async {
     final result = await _restClient.post('/auth/', {
-      'login': email,
+      'email': email,
       'password': password,
-      'social_login': false,
-      'supplier_user': false
+      // 'social_login': false,
+      // 'supplier_user': false
     });
 
     if (result.hasError) {

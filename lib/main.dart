@@ -1,5 +1,6 @@
 import 'package:consuni_mobile/app/core/bindings/application_bindings.dart';
 import 'package:consuni_mobile/app/core/ui/app_ui.dart';
+import 'package:consuni_mobile/app/routes/additem_routers.dart';
 import 'package:consuni_mobile/app/routes/auth_routers.dart';
 import 'package:consuni_mobile/app/routes/home_routers.dart';
 import 'package:consuni_mobile/app/routes/splash_routes.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ...SplashRoutes.routers,
         ...AuthRouters.routers,
         ...HomeRouters.routers,
+        ...AdditemRouters.routers,
       ],
     );
   }

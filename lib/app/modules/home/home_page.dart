@@ -12,16 +12,26 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Obx(
-        () => ListView.builder(
-            itemCount: controller.listItem.length,
-            itemBuilder: (context, index) {
-              final _item = controller.listItem[index];
-              return ItemTile(
-                item: _item,
-              );
-            }),
+        () => RefreshIndicator(
+          onRefresh: controller.refreshPage,
+          child: ListView.builder(
+              itemCount: controller.listItem.length,
+              itemBuilder: (context, index) {
+                final _item = controller.listItem[index];
+                return ItemTile(
+                  item: _item,
+                );
+              }),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed('/additem');
+        },
+        backgroundColor: Colors.red,
+        child: Icon(Icons.add),
       ),
     );
   }

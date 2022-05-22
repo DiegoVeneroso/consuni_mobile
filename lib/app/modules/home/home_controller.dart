@@ -47,4 +47,20 @@ class HomeController extends GetxController with LoaderMixin, MessagesMixin {
     final items = await _itemRepositoryImpl.findAll();
     listItem.assignAll(items); //sobrescreve a lista de items
   }
+
+  Future<void> refreshPage() async {
+    super.onReady();
+    try {
+      await findAllItems();
+    } catch (e, s) {
+      log('Erro ao atualizar a lista de item', error: e, stackTrace: s);
+      _message(
+        MessageModel(
+          title: 'Erro',
+          message: 'Erro ao atualiza a lista de item',
+          type: MessageType.error,
+        ),
+      );
+    }
+  }
 }

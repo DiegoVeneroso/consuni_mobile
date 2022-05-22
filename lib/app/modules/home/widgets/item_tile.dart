@@ -39,12 +39,12 @@ class ItemTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     Text(
-                      'X-salada',
+                      item.title,
                       style: AppUI.textbold,
                     ),
-                    Text(r'R$ 100,00'),
+                    Text(item.subtitle),
                   ],
                 ),
               ),

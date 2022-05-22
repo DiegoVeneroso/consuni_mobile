@@ -1,32 +1,32 @@
 import 'dart:convert';
 
 class ItemModel {
-  int id;
-  String title;
-  String Subtitle;
-  String image;
+  final int? id;
+  final String title;
+  final String subtitle;
+  final String descripion;
   ItemModel({
-    required this.id,
+    this.id,
     required this.title,
-    required this.Subtitle,
-    required this.image,
+    required this.subtitle,
+    required this.descripion,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
-      'Subtitle': Subtitle,
-      'image': image,
+      'subtitle': subtitle,
+      'descripion': descripion,
     };
   }
 
   factory ItemModel.fromMap(Map<String, dynamic> map) {
     return ItemModel(
-      id: map['id']?.toInt() ?? 0,
+      id: map['id']?.toInt(),
       title: map['title'] ?? '',
-      Subtitle: map['Subtitle'] ?? '',
-      image: map['image'] ?? '',
+      subtitle: map['subtitle'] ?? '',
+      descripion: map['descripion'] ?? '',
     );
   }
 

@@ -26,4 +26,28 @@ class ItemRepositoryImpl implements ItemRepository {
     }
     return result.body.map<ItemModel>((p) => ItemModel.fromMap(p)).toList();
   }
+
+  @override
+  Future<void> addItem(ItemModel item) async {
+    final result = await _restClient.post('/items/', {
+      "title": item.title,
+      "subtitle": item.subtitle,
+      "description": item.descripion,
+    });
+
+    if (result.hasError) {
+      var message = 'Erro ao registrar item';
+      if (result.statusCode == 400) {
+        message = result.body['error'];
+      }
+
+      log(
+        message,
+        error: result.statusText,
+        stackTrace: StackTrace.current,
+      );
+
+      throw RestClientException(message);
+    }
+  }
 }
