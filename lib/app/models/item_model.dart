@@ -5,11 +5,13 @@ class ItemModel {
   final String title;
   final String subtitle;
   final String descripion;
+  final String image;
   ItemModel({
     this.id,
     required this.title,
     required this.subtitle,
     required this.descripion,
+    required this.image,
   });
 
   Map<String, dynamic> toMap() {
@@ -18,6 +20,7 @@ class ItemModel {
       'title': title,
       'subtitle': subtitle,
       'descripion': descripion,
+      'image': image,
     };
   }
 
@@ -27,6 +30,7 @@ class ItemModel {
       title: map['title'] ?? '',
       subtitle: map['subtitle'] ?? '',
       descripion: map['descripion'] ?? '',
+      image: map['image'] ?? '',
     );
   }
 

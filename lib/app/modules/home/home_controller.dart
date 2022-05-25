@@ -1,10 +1,14 @@
 import 'dart:developer';
+import 'dart:io' as Io;
+import 'dart:typed_data';
 
 import 'package:consuni_mobile/app/core/mixins/loader_mixin.dart';
 import 'package:consuni_mobile/app/core/mixins/messages_mixin.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
 import 'package:consuni_mobile/app/repositories/item/item_repository_impl.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 
 class HomeController extends GetxController with LoaderMixin, MessagesMixin {
   final ItemRepositoryImpl _itemRepositoryImpl;
@@ -62,5 +66,13 @@ class HomeController extends GetxController with LoaderMixin, MessagesMixin {
         ),
       );
     }
+  }
+
+  Image decodeImage(String img64) {
+    Uint8List _bytesImage;
+
+    _bytesImage = const Base64Decoder().convert(img64);
+
+    return Image.memory(_bytesImage);
   }
 }

@@ -33,6 +33,7 @@ class ItemRepositoryImpl implements ItemRepository {
       "title": item.title,
       "subtitle": item.subtitle,
       "description": item.descripion,
+      "image": item.image
     });
 
     if (result.hasError) {

@@ -1,11 +1,14 @@
 import 'package:consuni_mobile/app/core/ui/app_ui.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
+import 'package:consuni_mobile/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ItemTile extends StatelessWidget {
   final ItemModel item;
+  HomeController controller = HomeController(itemRepositoryImpl: Get.find());
 
-  const ItemTile({
+  ItemTile({
     Key? key,
     required this.item,
   }) : super(key: key);
@@ -21,14 +24,13 @@ class ItemTile extends StatelessWidget {
           children: [
             Container(
               width: 80,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
                 image: DecorationImage(
-                    image: NetworkImage(
-                        'https://violinhalanches.files.wordpress.com/2016/04/violinha-lanches-araras-x-churrasco.jpg'),
+                    image: controller.decodeImage(item.image).image,
                     fit: BoxFit.cover),
               ),
             ),

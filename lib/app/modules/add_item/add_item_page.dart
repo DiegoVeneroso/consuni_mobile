@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io' as Io;
 import 'dart:io';
 
 import 'package:consuni_mobile/app/core/ui/app_state.dart';
@@ -13,7 +15,7 @@ import 'package:validatorless/validatorless.dart';
 import 'package:http/http.dart' as http;
 
 class AddItemPage extends StatefulWidget {
-  AddItemPage({Key? key}) : super(key: key);
+  const AddItemPage({Key? key}) : super(key: key);
 
   @override
   State<AddItemPage> createState() => _AddItemPageState();
@@ -129,6 +131,7 @@ class _AddItemPageState extends AppState<AddItemPage, AddItemController> {
                               title: _titleEC.text,
                               subtitle: _subtitleEC.text,
                               descripion: _descriptionEC.text,
+                              image: fileToBase64(pickedFile as File),
                             ),
                           );
                         }
@@ -228,12 +231,21 @@ class _AddItemPageState extends AppState<AddItemPage, AddItemController> {
     );
   }
 
-  Future<void> takePhoto(ImageSource source) async {
+  Future<File?> takePhoto(ImageSource source) async {
     final pickedImage =
-        await imagePicker.pickImage(source: source, imageQuality: 100);
+        await imagePicker.pickImage(source: source, imageQuality: 25);
     pickedFile = File(pickedImage!.path);
     controller.setItemImagePath(pickedFile!.path);
     Get.back();
+    // String imageToString =
+    //     Uri.parse(pickedFile.toString()).path.split("/").last;
     print(pickedFile);
+    return pickedFile;
+  }
+
+  String fileToBase64(File fileImage) {
+    final bytes = Io.File(fileImage.path).readAsBytesSync();
+
+    return base64.encode(bytes);
   }
 }
