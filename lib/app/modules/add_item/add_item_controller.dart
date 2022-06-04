@@ -4,11 +4,14 @@ import 'package:consuni_mobile/app/core/mixins/loader_mixin.dart';
 import 'package:consuni_mobile/app/core/mixins/messages_mixin.dart';
 import 'package:consuni_mobile/app/core/rest_client/rest_client.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
+import 'package:consuni_mobile/app/modules/home/home_controller.dart';
 import 'package:consuni_mobile/app/repositories/item/item_repository_impl.dart';
 import 'package:get/get.dart';
 
 class AddItemController extends GetxController with LoaderMixin, MessagesMixin {
   final ItemRepositoryImpl _itemRepositoryImpl;
+  HomeController homeController =
+      HomeController(itemRepositoryImpl: Get.find());
 
   final _loading = false.obs;
   final _message = Rxn<MessageModel>();
@@ -40,7 +43,7 @@ class AddItemController extends GetxController with LoaderMixin, MessagesMixin {
 
       _loading.toggle(); //fecha o loading
 
-      Get.back();
+      await Get.offAllNamed('/home');
 
       _message(MessageModel(
         title: 'Sucesso',

@@ -69,4 +69,19 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return UserModel.fromMap(result.body);
   }
+
+  @override
+  Future<UserModel> getUser(int id) async {
+    final result = await _restClient.get('/user/');
+
+    if (result.hasError) {
+      log(
+        'Erro ao buscar o item principal ${result.statusCode}',
+        error: result.statusText,
+        stackTrace: StackTrace.current,
+      );
+      throw RestClientException('Erro ao buscar os items principais');
+    }
+    return result.body.map<UserModel>((p) => UserModel.fromMap(p)).toList();
+  }
 }

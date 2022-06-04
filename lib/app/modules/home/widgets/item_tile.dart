@@ -1,4 +1,4 @@
-import 'package:consuni_mobile/app/core/ui/app_ui.dart';
+import 'package:awesome_icons/awesome_icons.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
 import 'package:consuni_mobile/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,45 +15,75 @@ class ItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        height: 80,
-        child: Row(
-          children: [
-            Container(
-              width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+          elevation: 4.0,
+          child: Column(
+            children: [
+              ListTile(
+                title: Text(
+                  item.title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                image: DecorationImage(
-                    image: controller.decodeImage(item.image).image,
-                    fit: BoxFit.cover),
+                trailing: const Icon(Icons.favorite_outline),
               ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              SizedBox(
+                height: 150.0,
+                child: Ink.image(
+                  image: controller.decodeImage(item.image).image,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                color: Colors.red,
+                padding: const EdgeInsets.all(10.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  item.subtitle,
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ButtonBar(
+                  alignment: MainAxisAlignment.spaceBetween,
+                  buttonPadding: const EdgeInsets.all(0.0),
                   children: [
-                    Text(
-                      item.title,
-                      style: AppUI.textbold,
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.end,
+                      children: const [
+                        Icon(FontAwesomeIcons.frown),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('1'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(FontAwesomeIcons.smile),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('1'),
+                      ],
                     ),
-                    Text(item.subtitle),
+                    TextButton(
+                      child: const Text('Ver mais...'),
+                      onPressed: () {
+                        Get.toNamed('/itemdetail', arguments: item);
+                      },
+                    )
                   ],
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
+              )
+            ],
+          )),
     );
   }
 }

@@ -35,6 +35,10 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.8.5+3
   http: ^0.13.4
+  form_builder_image_picker: ^2.0.0
+  awesome_icons: ^1.1.0
+
+  
 
   
 

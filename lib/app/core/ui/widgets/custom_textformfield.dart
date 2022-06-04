@@ -9,15 +9,21 @@ class CustomTextformfield extends StatelessWidget {
   final bool obscureText;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChange;
+  final int? maxlines;
+  final int? minlines;
+  final TextInputType? keyboardType;
 
-  const CustomTextformfield(
-      {Key? key,
-      required this.label,
-      this.controller,
-      this.validator,
-      this.onChange,
-      this.obscureText = false})
-      : super(key: key);
+  const CustomTextformfield({
+    Key? key,
+    required this.label,
+    this.controller,
+    this.validator,
+    this.onChange,
+    this.obscureText = false,
+    this.maxlines = 1,
+    this.minlines = 1,
+    this.keyboardType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,9 @@ class CustomTextformfield extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
       ),
+      maxLines: maxlines,
+      minLines: minlines,
+      keyboardType: keyboardType,
     );
   }
 }

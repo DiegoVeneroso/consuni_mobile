@@ -1,28 +1,36 @@
+import 'package:consuni_mobile/app/core/constants/constants.dart';
 import 'package:consuni_mobile/app/core/services/auth_services.dart';
+import 'package:consuni_mobile/app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  // AuthServices authServices = AuthServices();
+  // int idUser;
+
+  CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _getStorage = GetStorage();
+
     return Drawer(
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
-          const UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             // <-- SEE HERE
             decoration: BoxDecoration(color: const Color(0xff764abc)),
             accountName: Text(
-              "Pinkesh Darji",
+              _getStorage.read(Constants.USER_NAME).toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             accountEmail: Text(
-              "pinkesh.earth@gmail.com",
+              _getStorage.read(Constants.USER_EMAIL).toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
