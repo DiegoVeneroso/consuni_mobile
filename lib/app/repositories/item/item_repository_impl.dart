@@ -51,4 +51,24 @@ class ItemRepositoryImpl implements ItemRepository {
       throw RestClientException(message);
     }
   }
+
+  @override
+  Future<void> deleteItem(int idItem) async {
+    final result = await _restClient.delete('/items/$idItem');
+
+    if (result.hasError) {
+      var message = 'Erro ao deletar item';
+      if (result.statusCode == 400) {
+        message = result.body['error'];
+      }
+
+      log(
+        message,
+        error: result.statusText,
+        stackTrace: StackTrace.current,
+      );
+
+      throw RestClientException(message);
+    }
+  }
 }

@@ -29,7 +29,40 @@ class ItemTile extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                trailing: const Icon(Icons.favorite_outline),
+                trailing: Wrap(
+                  spacing: 12, // space between two icons
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/edititem');
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.dialog(
+                          AlertDialog(
+                            title: const Center(child: Text('Atenção')),
+                            content: Text('Deseja realmente excluir o item?'),
+                            actions: [
+                              TextButton(
+                                child: const Text("Voltar"),
+                                onPressed: () => Get.back(),
+                              ),
+                              TextButton(
+                                child: const Text("Excluir"),
+                                onPressed: () {
+                                  controller.deleteItem(item.id);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: const Icon(Icons.delete),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 150.0,

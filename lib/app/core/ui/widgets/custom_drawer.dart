@@ -9,7 +9,7 @@ class CustomDrawer extends StatelessWidget {
   // AuthServices authServices = AuthServices();
   // int idUser;
 
-  CustomDrawer({Key? key}) : super(key: key);
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +25,22 @@ class CustomDrawer extends StatelessWidget {
             decoration: BoxDecoration(color: const Color(0xff764abc)),
             accountName: Text(
               _getStorage.read(Constants.USER_NAME).toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             accountEmail: Text(
-              _getStorage.read(Constants.USER_EMAIL).toString(),
-              style: TextStyle(
+              _getStorage.read(Constants.USER_REP)
+                  ? 'Representante'
+                  : 'Representado',
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            currentAccountPicture: FlutterLogo(),
+            currentAccountPicture: const FlutterLogo(),
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.home,
             ),
             title: const Text('Page 1'),

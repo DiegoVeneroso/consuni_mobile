@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:consuni_mobile/app/core/mixins/loader_mixin.dart';
 import 'package:consuni_mobile/app/core/mixins/messages_mixin.dart';
+import 'package:consuni_mobile/app/core/rest_client/rest_client.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
 import 'package:consuni_mobile/app/repositories/item/item_repository_impl.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,47 @@ class HomeController extends GetxController with LoaderMixin, MessagesMixin {
         MessageModel(
           title: 'Erro',
           message: 'Erro ao atualiza a lista de item',
+          type: MessageType.error,
+        ),
+      );
+    }
+  }
+
+  Future<void> deleteItem(int? idItem) async {
+    try {
+      _loading.toggle(); //abre o loading
+
+      await _itemRepositoryImpl.deleteItem(idItem!);
+
+      _loading.toggle(); //fecha o loading
+
+      _message(MessageModel(
+        title: 'Sucesso',
+        message: 'Item excluído com sucesso',
+        type: MessageType.info,
+      ));
+
+      await Get.offAllNamed('/home');
+    } on RestClientException catch (e, s) {
+      _loading.toggle(); //fecha o loaging que foi aberto no try
+
+      log('Erro ao exlcuir item', error: e, stackTrace: s);
+
+      _message(
+        MessageModel(
+          title: 'Erro',
+          message: e.message,
+          type: MessageType.error,
+        ),
+      );
+    } catch (e, s) {
+      _loading.toggle(); //fecha o loading
+      log('Erro ao excluir o item', error: e, stackTrace: s);
+
+      _message(
+        MessageModel(
+          title: 'Erro',
+          message: 'Erro ao excluir o item',
           type: MessageType.error,
         ),
       );
