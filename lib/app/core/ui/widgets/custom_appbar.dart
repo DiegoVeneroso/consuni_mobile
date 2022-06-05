@@ -1,4 +1,6 @@
+import 'package:consuni_mobile/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppbar extends AppBar {
   CustomAppbar({Key? key, double elevation = 2})
@@ -13,9 +15,17 @@ class CustomAppbar extends AppBar {
             ),
             iconTheme: const IconThemeData(color: Colors.black),
             actions: [
-              const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Icon(Icons.search),
-              )
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    // Get.toNamed('/edititem', arguments: item);
+                    // HomeController(itemRepositoryImpl: Get.find())
+                    //     .searchBar
+                    //     .value = true;
+                  },
+                  child: const Icon(Icons.search),
+                ),
+              ),
             ]);
 }

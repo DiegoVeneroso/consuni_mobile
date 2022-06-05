@@ -4,13 +4,13 @@ class ItemModel {
   final int? id;
   final String title;
   final String subtitle;
-  final String descripion;
+  final String description;
   final String image;
   ItemModel({
     this.id,
     required this.title,
     required this.subtitle,
-    required this.descripion,
+    required this.description,
     required this.image,
   });
 
@@ -19,7 +19,7 @@ class ItemModel {
       'id': id,
       'title': title,
       'subtitle': subtitle,
-      'descripion': descripion,
+      'description': description,
       'image': image,
     };
   }
@@ -29,7 +29,7 @@ class ItemModel {
       id: map['id']?.toInt(),
       title: map['title'] ?? '',
       subtitle: map['subtitle'] ?? '',
-      descripion: map['descripion'] ?? '',
+      description: map['description'] ?? '',
       image: map['image'] ?? '',
     );
   }

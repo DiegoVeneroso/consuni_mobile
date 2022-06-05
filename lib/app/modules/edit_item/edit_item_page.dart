@@ -7,6 +7,7 @@ import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_textformfield.dart';
 import 'package:consuni_mobile/app/models/item_model.dart';
 import 'package:consuni_mobile/app/modules/edit_item/edit_item_controller.dart';
+import 'package:consuni_mobile/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,6 +40,9 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController =
+        HomeController(itemRepositoryImpl: Get.find());
+
     return Scaffold(
       appBar: CustomAppbar(
         elevation: 0,
@@ -84,12 +88,9 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
                                     23.0)), // Set rounded corner radius
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: controller.isItemPicPathSet.value == true
-                                  ? FileImage(
-                                          File(controller.itemPicPath.value))
-                                      as ImageProvider
-                                  : const AssetImage(
-                                      'assets/images/no-image.png'),
+                              image: homeController
+                                  .decodeImage(controller.item.image)
+                                  .image,
                             ),
                           ),
                         ),
@@ -138,7 +139,7 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
                   ),
                   CustomTextformfield(
                     label: 'Título',
-                    controller: _titleEC,
+                    controller: _titleEC..text = controller.item.title,
                     validator: Validatorless.required('Título é obrigatório'),
                     maxlines: 2,
                     minlines: 2,
@@ -148,7 +149,7 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
                   ),
                   CustomTextformfield(
                     label: 'Subtítulo',
-                    controller: _subtitleEC,
+                    controller: _subtitleEC..text = controller.item.subtitle,
                     maxlines: 2,
                     minlines: 2,
                     validator: Validatorless.multiple([
@@ -161,7 +162,8 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
                   ),
                   CustomTextformfield(
                     label: 'Descrição',
-                    controller: _descriptionEC,
+                    controller: _descriptionEC
+                      ..text = controller.item.description,
                     maxlines: 5,
                     minlines: 5,
                     validator: Validatorless.multiple([
@@ -175,18 +177,19 @@ class _EditItemPageState extends AppState<EditItemPage, EditItemController> {
                   Center(
                     child: CustomButtom(
                       width: context.width,
-                      label: 'CADASTRAR',
+                      label: 'ATUALIZAR',
                       onPressed: () {
                         final formValid =
                             _formKey.currentState?.validate() ?? false;
                         if (controller.isItemPicPathSet.value == true) {
                           validImage.value = false;
                           if (formValid) {
-                            controller.addItem(
+                            controller.updateItem(
                               ItemModel(
+                                id: controller.item.id,
                                 title: _titleEC.text,
                                 subtitle: _subtitleEC.text,
-                                descripion: _descriptionEC.text,
+                                description: _descriptionEC.text,
                                 image: fileToBase64(pickedFile as File),
                               ),
                             );

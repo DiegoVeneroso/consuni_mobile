@@ -10,6 +10,10 @@ import 'package:get/get.dart';
 
 class EditItemController extends GetxController
     with LoaderMixin, MessagesMixin {
+  final _item = Rx<ItemModel>(Get.arguments);
+
+  ItemModel get item => _item.value;
+
   final ItemRepositoryImpl _itemRepositoryImpl;
   HomeController homeController =
       HomeController(itemRepositoryImpl: Get.find());
@@ -36,11 +40,11 @@ class EditItemController extends GetxController
     isItemPicPathSet.value = true;
   }
 
-  Future<void> addItem(ItemModel item) async {
+  Future<void> updateItem(ItemModel item) async {
     try {
       _loading.toggle(); //abre o loading
 
-      await _itemRepositoryImpl.addItem(item);
+      await _itemRepositoryImpl.updateItem(item);
 
       _loading.toggle(); //fecha o loading
 
@@ -48,13 +52,13 @@ class EditItemController extends GetxController
 
       _message(MessageModel(
         title: 'Sucesso',
-        message: 'Cadastro realizado com sucesso',
+        message: 'Atualizado com sucesso',
         type: MessageType.info,
       ));
     } on RestClientException catch (e, s) {
       _loading.toggle(); //fecha o loaging que foi aberto no try
 
-      log('Erro ao registrar o item', error: e, stackTrace: s);
+      log('Erro ao atualizar o item', error: e, stackTrace: s);
 
       _message(
         MessageModel(
@@ -65,12 +69,12 @@ class EditItemController extends GetxController
       );
     } catch (e, s) {
       _loading.toggle(); //fecha o loading
-      log('Erro ao registrar o usuario', error: e, stackTrace: s);
+      log('Erro ao atualizar item', error: e, stackTrace: s);
 
       _message(
         MessageModel(
           title: 'Erro',
-          message: 'Erro ao registrar o item',
+          message: 'Erro ao atualizar o item',
           type: MessageType.error,
         ),
       );

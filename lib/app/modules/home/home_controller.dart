@@ -18,8 +18,9 @@ class HomeController extends GetxController with LoaderMixin, MessagesMixin {
   final _message = Rxn<MessageModel>();
   final listItem = <ItemModel>[].obs;
 
-  HomeController({required ItemRepositoryImpl itemRepositoryImpl})
-      : _itemRepositoryImpl = itemRepositoryImpl;
+  HomeController({
+    required ItemRepositoryImpl itemRepositoryImpl,
+  }) : _itemRepositoryImpl = itemRepositoryImpl;
 
   @override
   void onInit() {
@@ -48,8 +49,8 @@ class HomeController extends GetxController with LoaderMixin, MessagesMixin {
     }
   }
 
-  Future<void> findAllItems() async {
-    final items = await _itemRepositoryImpl.findAll();
+  Future<void> findAllItems([String text = '']) async {
+    final items = await _itemRepositoryImpl.findAll(text);
     listItem.assignAll(items); //sobrescreve a lista de items
   }
 

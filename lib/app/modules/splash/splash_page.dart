@@ -38,13 +38,6 @@ class SplashPage extends GetView<SplashController> {
                   const SizedBox(
                     height: 60,
                   ),
-                  CustomButtom(
-                    label: 'ACESSAR',
-                    width: context.widthTransformer(
-                        reducedBy: 40), //reducedBY reduz o tamanho em 40%
-                    height: 35,
-                    onPressed: () => controller.checkLogged(),
-                  ),
                 ],
               ),
             )

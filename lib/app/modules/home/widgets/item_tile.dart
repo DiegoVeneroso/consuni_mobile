@@ -34,7 +34,7 @@ class ItemTile extends StatelessWidget {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed('/edititem');
+                        Get.toNamed('/edititem', arguments: item);
                       },
                       child: const Icon(Icons.edit),
                     ),
@@ -43,7 +43,8 @@ class ItemTile extends StatelessWidget {
                         Get.dialog(
                           AlertDialog(
                             title: const Center(child: Text('Atenção')),
-                            content: Text('Deseja realmente excluir o item?'),
+                            content:
+                                const Text('Deseja realmente excluir o item?'),
                             actions: [
                               TextButton(
                                 child: const Text("Voltar"),
@@ -76,7 +77,7 @@ class ItemTile extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  item.subtitle,
+                  item.description,
                   style: const TextStyle(
                     fontSize: 12,
                   ),

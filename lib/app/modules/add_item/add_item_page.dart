@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io' as Io;
 import 'dart:io';
-import 'package:consuni_mobile/app/core/mixins/messages_mixin.dart';
 import 'package:consuni_mobile/app/core/ui/app_state.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_appbar.dart';
 import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
@@ -68,6 +67,7 @@ class _AddItemPageState extends AppState<AddItemPage, AddItemController> {
                   const SizedBox(
                     height: 20,
                   ),
+                  // CustomFormImagePicker(),
                   Stack(
                     children: <Widget>[
                       Obx(
@@ -187,7 +187,7 @@ class _AddItemPageState extends AppState<AddItemPage, AddItemController> {
                               ItemModel(
                                 title: _titleEC.text,
                                 subtitle: _subtitleEC.text,
-                                descripion: _descriptionEC.text,
+                                description: _descriptionEC.text,
                                 image: fileToBase64(pickedFile as File),
                               ),
                             );

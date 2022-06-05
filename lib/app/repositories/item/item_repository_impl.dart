@@ -13,8 +13,12 @@ class ItemRepositoryImpl implements ItemRepository {
   }) : _restClient = restClient;
 
   @override
-  Future<List<ItemModel>> findAll() async {
-    final result = await _restClient.get('/items/');
+  Future<List<ItemModel>> findAll(String text) async {
+    if (text == '') {
+      final result = await _restClient.get('/items/');
+    }
+
+    final result = await _restClient.get('/items/$text');
 
     if (result.hasError) {
       log(
@@ -22,7 +26,7 @@ class ItemRepositoryImpl implements ItemRepository {
         error: result.statusText,
         stackTrace: StackTrace.current,
       );
-      throw RestClientException('Erro ao buscar os items principais');
+      throw RestClientException('Erro ao buscar os items');
     }
     return result.body.map<ItemModel>((p) => ItemModel.fromMap(p)).toList();
   }
@@ -32,7 +36,7 @@ class ItemRepositoryImpl implements ItemRepository {
     final result = await _restClient.post('/items/', {
       "title": item.title,
       "subtitle": item.subtitle,
-      "description": item.descripion,
+      "description": item.description,
       "image": item.image
     });
 
@@ -70,5 +74,46 @@ class ItemRepositoryImpl implements ItemRepository {
 
       throw RestClientException(message);
     }
+  }
+
+  @override
+  Future<void> updateItem(ItemModel item) async {
+    final result = await _restClient.put('/items/${item.id}', {
+      "id": item.id,
+      "title": item.title,
+      "subtitle": item.subtitle,
+      "description": item.description,
+      "image": item.image
+    });
+
+    if (result.hasError) {
+      var message = 'Erro ao atualizar item';
+      if (result.statusCode == 400) {
+        message = result.body['error'];
+      }
+
+      log(
+        message,
+        error: result.statusText,
+        stackTrace: StackTrace.current,
+      );
+
+      throw RestClientException(message);
+    }
+  }
+
+  @override
+  Future<void> searchItem(String text) async {
+    final result = await _restClient.get('/items/$text');
+
+    if (result.hasError) {
+      log(
+        'Erro ao buscar o item principal ${result.statusCode}',
+        error: result.statusText,
+        stackTrace: StackTrace.current,
+      );
+      throw RestClientException('Erro ao buscar os items principais');
+    }
+    return result.body.map<ItemModel>((p) => ItemModel.fromMap(p)).toList();
   }
 }
