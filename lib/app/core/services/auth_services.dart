@@ -8,7 +8,8 @@ class AuthServices extends GetxService {
   final _getStorage = GetStorage();
 
   Future<AuthServices> init() async {
-    _getStorage.listenKey(Constants.USER_KEY, (value) {
+    await Future.delayed(const Duration(seconds: 3));
+    _getStorage.listenKey(Constants.USER_KEY, (value) async {
       //forma didática
       if (value != null) {
         _isLogged(true);

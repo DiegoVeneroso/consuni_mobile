@@ -1,4 +1,3 @@
-import 'package:consuni_mobile/app/core/ui/widgets/custom_buttom.dart';
 import 'package:consuni_mobile/app/modules/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +37,7 @@ class SplashPage extends GetView<SplashController> {
                   const SizedBox(
                     height: 60,
                   ),
+                  const CircularProgressIndicator(),
                 ],
               ),
             )
